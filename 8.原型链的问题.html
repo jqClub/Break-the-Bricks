@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script>
+            var log = console.log.bind(console);
+            // 原型链的问题
+            function SuperType() {
+                this.color = ['red', 'blue', 'green'];
+            }
+            function SubType() {}
+            SubType.prototype = new SuperType();
+
+            var instance0 = new SubType();
+            log(instance0.color);  //["red", "blue", "green"]
+
+            var instance1 = new SubType();
+            instance1.color.push('black');
+            log(instance1.color);  //["red", "blue", "green", "black"]
+
+            var instance2 = new SubType();
+            log(instance2.color);  //["red", "blue", "green", "black"]
+        </script>
+    </body>
+</html>

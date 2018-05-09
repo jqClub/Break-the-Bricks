@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            table, td, p {
+                border: 1px solid black;
+            }
+            table {
+                word-break: break-all;
+                /*word-break: keep-all;*/
+            }
+            p {
+                width: 11em;
+                word-wrap: break-word;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="2.jpg"  alt="上海鲜花港 - 郁金香" />
+        <table width="600px">
+            <tr style="background-color:#F9F7FC;">
+               <td style="width:120px;">全是中文有标点</td>
+               <td style="width:120px;">全是中文无标点</td>
+               <td style="width:120px;">全是英文有标点</td>
+               <td style="width:120px;">中文和英文</td>
+               <td style="width:120px;">全是英文无标点</td>
+            </tr>
+            <tr >
+               <td style="width:120px;">你好这是中文。你好这是中文。你好这是中文。你好这是中文。</td>
+               <td style="width:120px;">你好这是中文你好这是中文你好这是中文你好这是中文</td>
+               <td style="width:120px;">This is all English. This is all English. This is all English.</td>
+               <td style="width:120px;">中英文混排的情况。Chinese and English.中英文混排的情况。Chinese and English.</td>
+               <td style="width:120px;">This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</td>
+            </tr>
+        </table>
+        <p class="test">This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+    </body>
+</html>

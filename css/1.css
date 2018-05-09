@@ -1,0 +1,28 @@
+/*1.如何让一个不定宽高的DIV,垂直水平居中?*/
+div {
+    border: 1px solid black;
+}
+.father {
+    text-align: center;
+
+    border: 1px solid black;
+}
+.child {
+    display: inline-block;
+    vertical-align: middle;
+
+    border: 1px solid black;
+}
+/*.father {
+    position: relative;
+
+    border: 1px solid black;
+}
+.child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid black;
+}*/

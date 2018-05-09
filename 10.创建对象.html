@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script>
+            var log = console.log.bind(console);
+            // 1.工厂模式
+            // function createPerson(name, age, job) {
+            //     var o = new Object();
+            //     o.name = name;
+            //     o.age = age;
+            //     o.job = job;
+            //     o.sayName = function() {
+            //         alert(this.name);
+            //     }
+            //     return o;
+            // }
+            // var person1 = createPerson('json', '29', 'Software Engineer');
+            // var person2 = createPerson('jack', '22', 'Doctor');
+
+            // 2.构造函数模式
+            // function Person(name, age, job) {
+            //     this.name = name;
+            //     this.age = age;
+            //     this.job = job;
+            //     // this.sayName = function() {
+            //     //     log(this.name);
+            //     // }
+            //     this.sayName = new Function('alert(this.name)');
+            // }
+            // var person1 = new Person('Nicholes', 29, 'Software Engineer');
+            // var person2 = new Person('Greg', 22, 'Doctor');
+            // person1.sayName();
+            // log(person1.constructor == Person);
+            // log(person1 instanceof Object);
+            // log(person1 instanceof Person);
+            // log(person2.constructor == Person);
+            // log(person2 instanceof Object);
+            // log(person2 instanceof Person);
+            //
+            // var person3 = Person('jq', 23, 'IT');
+            // window.sayName();
+            //
+            // var o = new Object();
+            // Person.call(o, 'kristen', 25, 'Nurse');
+            // o.sayName();
+            //
+            // alert(person1.sayName == person2.sayName);
+
+            // 3.原型模式
+            // function Person() {
+            //     Person.prototype.name = 'Nicholas';
+            //     Person.prototype.age = 29;
+            //     Person.prototype.job = 'Sofeware Engineer';
+            //     Person.prototype.sayName = function() {
+            //         alert(this.name);
+            //     }
+            // }
+            // var person1 = new Person();
+            // person1.sayName();
+            // var person2 = new Person();
+            // person2.sayName();
+            // alert(person1.sayName == person2.sayName);
+
+            // var keys = Object.keys(Person.prototype);
+            // // var keys = Object.getOwnPropertyNames(Person.prototype);
+            // log(keys);
+            //
+            // var p1 = new Person();
+            // p1.name =  'Rob';
+            // p1.age = 31;
+            // var p1keys =  Object.keys(p1);
+            // log(p1keys);
+            // var keys = Object
+            //
+            // function Person() {
+            //
+            // };
+            // var friend = new Person();
+            // Person.prototype = {
+            //     constructor: Person,
+            //     name: 'Nicholas',
+            //     age: 29,
+            //     job: 'Software  Engineer',
+            //     sayName: function() {
+            //         alert(this.name)
+            //     }
+            // }
+            // friend.sayName();
+
+            // 4.组合使用构造函数模式和原型模式
+            // function Person(name, age, job) {
+            //     this.name = name;
+            //     this.age = age;
+            //     this.job = job;
+            //     this.friends = ['Shelby', 'Court'];
+            // }
+            // Person.prototype = {
+            //     constructor: Person,
+            //     sayName: function() {
+            //         alert(this.name);
+            //     }
+            // }
+            // var person1 = new Person('Nicholas', 31, 'Software Engineer');
+            // var person2 = new Person('Greg', 27, 'Doctor');
+            //
+            // person1.friends.push('Van');
+            // log(person1.friends)
+            // log(person2.friends)
+            // log(person1.friends == person2.friends)
+            // log(person1.sayName == person2.sayName);
+
+            // 5.动态原型模式
+            // function Person(name, age, job) {
+            //     // 属性
+            //     this.name = name;
+            //     this.age = age;
+            //     this.job = job;
+            //     // 方法
+            //     if(typeof this.sayName != 'function') {
+            //         Person.prototype.sayName = function() {
+            //             log(this.name)
+            //         }
+            //     }
+            // }
+            // var friend = new Person('Nicholas', 29, 'Software Engineer');
+            // friend.sayName();
+
+            // 6.寄生构造函数模式
+            // function Person(name, age, job) {
+            //     var o = new Object();
+            //     o.name = name;
+            //     o.age = age;
+            //     o.job = job;
+            //     o.sayName = function() {
+            //         log(this.name)
+            //     }
+            //     return o
+            // }
+            // var friend = new Person('Nicholas', 29, 'Software Engineer');
+            // friend.sayName();
+
+            // 7.稳妥构造函数模式
+            function Person(name, age, job) {
+                // 创建要返回的对象
+                var o = new Object();
+                // 可以在这里定义私有变量和函数
+                // 添加方法
+                o.sayName = function() {
+                    log(name);
+                }
+                // 返回对象
+                return o;
+            }
+            var friend = Person('Nicholas', 29, 'Software Engineer');
+            friend.sayName();
+        </script>
+    </body>
+</html>

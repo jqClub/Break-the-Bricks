@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <title></title>
+</head>
+
+<body>
+
+    <script src='http://jqclubweb.com/js/gua.js'></script>
+    <script src='http://jqclubweb.com/js/jq.js'></script>
+
+
+    <script type="text/javascript">
+        // ajax通用函数(promise升级版)
+        // request有3个参数 => 1.method：请求的方法 2.path:请求的地址 3.data：发送的数据
+        var ajax = function(request) {
+            var r = new XMLHttpRequest()
+            // 设置发送的数据的格式(跨域的时候注释掉这行)
+            // r.setRequestHeader('Content-Type', 'application/json')
+            // **返回Promise实例对象
+            return new Promise(function(resolve, reject) {
+                // 注册响应函数
+                r.onreadystatechange = function() {
+                    if (r.readyState === 4) {
+                        if (r.status === 200) {
+                            var response = JSON.parse(r.response)
+                            resolve(response)
+                        } else {
+                            reject(r.status)
+                        }
+                    }
+                }
+                // 设置请求方法和请求地址
+                r.open(request.method, request.path, true)
+                // 判断是什么类型的请求
+                var data = JSON.stringify(request.data)
+                if (request.method == 'GET') {
+                    r.send()
+                } else {
+                    r.send(data)
+                }
+            })
+        }
+        // api-ajax请求
+        var apiAll = {
+            getDetails: function() {
+                var url = 'http://192.168.2.106:8090/api/newsList'
+                var request = {
+                    method: 'GET',
+                    path: url,
+                    data: {},
+                }
+                var getDetails = ajax(request)
+                return getDetails
+            }
+        }
+        // 拿到数据，做点什么
+        var doSomething = function() {
+            // 得到promise
+            var details = apiAll.getDetails()
+            details.then(function(data) {
+                // 拿到数据想做什么
+                log(JSON.stringify(data))
+            }).catch(function(status) {
+                // 如果AJAX失败，获得响应代码
+                log('ERROR: ' + status)
+            })
+        }
+
+        var __main = function() {
+            doSomething()
+        }
+        __main()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        .float-div div{
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            /*文字内容垂直水平居中写法*/
+            text-align: center;
+            line-height: 100px;
+            /**/
+            background-color:#FFFF99;
+            /*浮动*/
+            float: left;
+        }
+        .normal-div{
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            /**/
+            background-color:#CCCCFF;
+        }
+        /*1.添加空div标签，并设置样式 clear: both*/
+        /*.clear-both {
+            clear: both;
+        }*/
+        /*2.父级标签定义伪类 ::after*/
+        /*.float-div::after {
+            content: '';
+            height: 0;
+            /**/
+            /*display: block;
+            clear: both;*/
+        /*}*/
+        /*3.父级标签增加样式 overflow:hidden*/
+        /*.float-div {
+            overflow: hidden;
+        }*/
+        /*4.*/
+        .float-div:after{
+            /*//设置内容为空
+            //高度为0
+            //行高为0
+            //将文本转为块级元素
+            //将元素隐藏
+            //清除浮动*/
+            content: "";
+            height: 0;
+            line-height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+　　　　　}
+        .float-div{
+            /*为了兼容IE*/
+            zoom:1;
+        }
+    </style>
+</head>
+<body>
+    <div class="float-div">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <!-- <div class="clear-both"></div> -->
+    <div class="normal-div">A</div>
+</body>
+</html>

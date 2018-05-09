@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script>
+            var log = console.log.bind(console);
+            // 1.原型链
+            // function SuperType() {
+            //     this.prototype = true;
+            // }
+            // SuperType.prototype.getSuperValue = function () {
+            //     return this.prototype;
+            // }
+            // function SubType() {
+            //     this.subprototype = false;
+            // }
+            // // 继承了SuperType
+            // SubType.prototype = new SuperType();
+            // SubType.prototype.getSubValue = function() {
+            //     return this.subproperty;
+            // }
+            // var instance = new SubType();
+            // // log(instance.getSuperValue());
+            // // log(instance.subprototype)
+            // // 1.使用instanceof操作符
+            // log(instance instanceof Object);
+            // log(instance instanceof SuperType);
+            // log(instance instanceof SubType);
+            // // 2.使用isPrototypeOf()
+            // log(Object.prototype.isPrototypeOf(instance));
+            // log(SuperType.prototype.isPrototypeOf(instance));
+            // log(SubType.prototype.isPrototypeOf(instance));
+
+            // 2.借助构造函数
+            // function SuperType() {
+            //     this.colors = ['red', 'blue', 'green'];
+            // }
+            // function SubType() {
+            //     // 继承了SuperType
+            //     // SuperType.call(this);
+            //     SuperType.apply(this);
+            // }
+            // var instance1 = new SubType();
+            // instance1.colors.push('black');
+            // log(instance1.colors)
+            //
+            // var instance2 = new SubType();
+            // log(instance2.colors)
+
+            // 3.组合继承
+            // function SuperType(name) {
+            //     this.name = name;
+            //     this.colors = ['red', 'blue', 'green'];
+            // }
+            //
+            // SuperType.prototype.sayName = function() {
+            //     log(this.name);
+            // }
+            //
+            // function SubType(name, age) {
+            //     // 继承属性
+            //     SuperType.call(this, name);
+            //     this.age = age;
+            // }
+            // SubType.prototype = new SuperType();
+            // SubType.prototype.constructor = SubType;
+            // SubType.prototype.sayAge = function() {
+            //     log(this.age)
+            // };
+            // var instance1 = new SubType('Nicholas', 29);
+            // instance1.colors.push('black');
+            // log(instance1.colors);
+            // instance1.sayName();
+            // instance1.sayAge();
+
+            // 4.原型式继承
+            // function object(o) {
+            //     function F() {}
+            //     F.prototype = o
+            //     return new F()
+            // }
+            // var person = {
+            //     name: 'Nicholas',
+            //     friends: ['a', 'b', 'c'],
+            // }
+            // var anotherPerson = object(person);
+            // anotherPerson.name = 'Grey';
+            // anotherPerson.friends.push('Rob');
+            // log(person.friends);
+
+            // 5.寄生式继承
+            // function object(o) {
+            //     function F() {}
+            //     F.prototype = o
+            //     return new F()
+            // }
+            // function createAnother(original) {
+            //     var clone = object(original);  //通过调用函数创建一个新对象
+            //     clone.sayHi = function() {
+            //         log('hi')
+            //     };
+            //     return clone;
+            // }
+            // var person = {
+            //     name: 'Nicholas',
+            //     friends: ['a', 'b', 'c']
+            // };
+            // var anotherPerson = createAnother(person);
+            // anotherPerson.sayHi();
+
+            // 6.寄生组合式继承
+            function object(o) {
+                function F() {}
+                F.prototype = o
+                return new F()
+            }
+            function SuperType(name) {
+                this.name = name;
+                this.colors = ['a', 'b', 'c']
+            }
+            SuperType.prototype.sayName = function() {
+                log(this.name)
+            }
+            function SubType(name, age) {
+                SuperType.call(this, name);
+                this.age = age;
+            }
+
+            // 寄生组合式继承的基本模式
+            function inheritprototype(subType, superType) {
+                var prototype = object(superType.prototype);  //创建对象
+                prototype.constructor = subType;  //增强对象
+                subType.prototype = prototype;
+            }
+            inheritprototype(SubType, SuperType);
+            SubType.prototype.sayAge = function() {
+                log(this.age)
+            }
+
+            var person1 = new SubType('haha', 25)
+            person1.sayAge();
+            person1.sayName();
+         </script>
+    </body>
+</html>
